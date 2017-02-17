@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://light-white.me/"/>
   <updated>2017-02-06T07:10:39.395Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://light-white.me/</id>
   
   <author>
     <name>Light-white</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Windows下Python爬虫框架Scrapy安装</title>
-    <link href="http://yoursite.com/2017/02/06/Windows%E4%B8%8BPython%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2017/02/06/Windows下Python爬虫框架Scrapy安装/</id>
+    <link href="http://light-white.me/2017/02/06/Windows%E4%B8%8BPython%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E5%AE%89%E8%A3%85/"/>
+    <id>http://light-white.me/2017/02/06/Windows下Python爬虫框架Scrapy安装/</id>
     <published>2017-02-06T05:57:36.000Z</published>
     <updated>2017-02-06T07:10:39.395Z</updated>
     
@@ -45,18 +45,18 @@
     </summary>
     
     
-      <category term="Windows" scheme="http://yoursite.com/tags/Windows/"/>
+      <category term="Windows" scheme="http://light-white.me/tags/Windows/"/>
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="http://light-white.me/tags/Python/"/>
     
-      <category term="Scrapy" scheme="http://yoursite.com/tags/Scrapy/"/>
+      <category term="Scrapy" scheme="http://light-white.me/tags/Scrapy/"/>
     
   </entry>
   
   <entry>
     <title>Windows环境下Mongodb安装及配置</title>
-    <link href="http://yoursite.com/2016/10/27/Windows%E7%8E%AF%E5%A2%83%E4%B8%8BMongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/"/>
-    <id>http://yoursite.com/2016/10/27/Windows环境下Mongodb安装及配置/</id>
+    <link href="http://light-white.me/2016/10/27/Windows%E7%8E%AF%E5%A2%83%E4%B8%8BMongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/"/>
+    <id>http://light-white.me/2016/10/27/Windows环境下Mongodb安装及配置/</id>
     <published>2016-10-27T10:32:32.000Z</published>
     <updated>2016-10-27T10:32:53.380Z</updated>
     
@@ -103,16 +103,16 @@ storage:
     </summary>
     
     
-      <category term="MongoDB" scheme="http://yoursite.com/tags/MongoDB/"/>
+      <category term="Windows" scheme="http://light-white.me/tags/Windows/"/>
     
-      <category term="Windows" scheme="http://yoursite.com/tags/Windows/"/>
+      <category term="MongoDB" scheme="http://light-white.me/tags/MongoDB/"/>
     
   </entry>
   
   <entry>
     <title>Markdown语法简介</title>
-    <link href="http://yoursite.com/2016/09/23/Markdown%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/2016/09/23/Markdown语法简介/</id>
+    <link href="http://light-white.me/2016/09/23/Markdown%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B/"/>
+    <id>http://light-white.me/2016/09/23/Markdown语法简介/</id>
     <published>2016-09-23T07:51:04.000Z</published>
     <updated>2017-02-06T07:10:46.440Z</updated>
     
@@ -277,7 +277,7 @@ __double underscores__
 </code></pre><h1 id="4-其它"><a href="#4-其它" class="headerlink" title="4. 其它"></a>4. 其它</h1><h2 id="4-1-自动链接"><a href="#4-1-自动链接" class="headerlink" title="4.1 自动链接"></a>4.1 自动链接</h2><p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：<br><a href="http://light-white.club/" target="_blank" rel="external">http://light-white.club/</a></p>
 <pre><code>&lt;http://light-white.club/&gt;
 </code></pre><p>邮址的自动链接也很类似</p>
-<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#108;&#105;&#103;&#x68;&#x74;&#x2d;&#119;&#104;&#105;&#x74;&#x65;&#64;&#x6f;&#117;&#116;&#x6c;&#111;&#x6f;&#107;&#x2e;&#99;&#111;&#x6d;">&#108;&#105;&#103;&#x68;&#x74;&#x2d;&#119;&#104;&#105;&#x74;&#x65;&#64;&#x6f;&#117;&#116;&#x6c;&#111;&#x6f;&#107;&#x2e;&#99;&#111;&#x6d;</a>
+<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#x77;&#104;&#x69;&#116;&#x65;&#x40;&#x6f;&#x75;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;">&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#x77;&#104;&#x69;&#116;&#x65;&#x40;&#x6f;&#x75;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;</a>
 
 <pre><code>&lt;light-white@outlook.com&gt;
 </code></pre><h2 id="4-2-反斜杠"><a href="#4-2-反斜杠" class="headerlink" title="4.2 反斜杠"></a>4.2 反斜杠</h2><p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
@@ -306,16 +306,16 @@ _   底线
     </summary>
     
     
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+      <category term="blog" scheme="http://light-white.me/tags/blog/"/>
     
-      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+      <category term="Markdown" scheme="http://light-white.me/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>Hexo+Github博客搭建</title>
-    <link href="http://yoursite.com/2016/04/27/Hexo-Github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <id>http://yoursite.com/2016/04/27/Hexo-Github博客搭建/</id>
+    <link href="http://light-white.me/2016/04/27/Hexo-Github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <id>http://light-white.me/2016/04/27/Hexo-Github博客搭建/</id>
     <published>2016-04-27T08:50:26.000Z</published>
     <updated>2016-09-23T08:06:35.655Z</updated>
     
@@ -366,11 +366,11 @@ categories:
     </summary>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://light-white.me/tags/Hexo/"/>
     
-      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+      <category term="Github" scheme="http://light-white.me/tags/Github/"/>
     
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+      <category term="blog" scheme="http://light-white.me/tags/blog/"/>
     
   </entry>
   
