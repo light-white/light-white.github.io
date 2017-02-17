@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://light-white.me/"/>
-  <updated>2017-02-06T07:10:39.395Z</updated>
+  <updated>2017-02-17T07:28:05.518Z</updated>
   <id>http://light-white.me/</id>
   
   <author>
@@ -14,6 +14,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>百度Ueditor图片管理无法显示</title>
+    <link href="http://light-white.me/2017/02/17/baidu/"/>
+    <id>http://light-white.me/2017/02/17/baidu/</id>
+    <published>2017-02-17T07:03:48.000Z</published>
+    <updated>2017-02-17T07:28:05.518Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到<br><img src="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png" alt=""><br>打开控制台发现获取的是本地绝对路径</p>
+<p>第一时间想到修改<code>config.json</code>中的文件访问路径</p>
+<pre><code>/* 列出指定目录下的图片 */
+&quot;imageManagerActionName&quot;: &quot;listimage&quot;, /* 执行图片管理的action名称 */
+&quot;imageManagerListPath&quot;: &quot;/ueditor/jsp/upload/image/&quot;, /* 指定要列出图片的目录 */
+&quot;imageManagerListSize&quot;: 20, /* 每次列出文件数量 */
+&quot;imageManagerUrlPrefix&quot;: &quot;http://localhost:8080/Meet/&quot;, /* 图片访问路径前缀 */
+&quot;imageManagerInsertAlign&quot;: &quot;none&quot;, /* 插入的图片浮动方式 */
+&quot;imageManagerAllowFiles&quot;: [&quot;.png&quot;, &quot;.jpg&quot;, &quot;.jpeg&quot;, &quot;.gif&quot;, &quot;.bmp&quot;], /* 列出的文件类型 */
+</code></pre><p>将UrlPrefix修改为当前项目域名<br>然后发现还有问题  这时候绝对路径跟在域名后面了<br>配置文件<code>ueditor.config.js</code>中说<code>controller.jsp</code>是服务器统一请求接口路径<br>我们修改一下他试试<br>修改后代码如下  </p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    import=&quot;com.baidu.ueditor.ActionEnter&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ page trimDirectiveWhitespaces=&quot;true&quot; %&gt;
+&lt;%
+
+    request.setCharacterEncoding( &quot;utf-8&quot; );
+    response.setHeader(&quot;Content-Type&quot; , &quot;text/html&quot;);
+    String rootPath = application.getRealPath( &quot;/&quot; );
+    String action = request.getParameter(&quot;action&quot;);  
+    String result = new ActionEnter( request, rootPath ).exec();  
+    if( action!=null &amp;&amp;   
+       (action.equals(&quot;listfile&quot;) || action.equals(&quot;listimage&quot;) ) ){  
+        rootPath = rootPath.replace(&quot;\\&quot;, &quot;/&quot;);  
+        result = result.replaceAll(rootPath, &quot;/&quot;);  
+    }  
+    out.write( result );
+%&gt;
+</code></pre><p>这时就能看到上传到服务器上的图片与文件了</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到&lt;br&gt;&lt;img src=&quot;http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;打开控制台发现获
+    
+    </summary>
+    
+    
+      <category term="ueditor" scheme="http://light-white.me/tags/ueditor/"/>
+    
+      <category term="html" scheme="http://light-white.me/tags/html/"/>
+    
+      <category term="jsp" scheme="http://light-white.me/tags/jsp/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows下Python爬虫框架Scrapy安装</title>
@@ -103,9 +156,9 @@ storage:
     </summary>
     
     
-      <category term="Windows" scheme="http://light-white.me/tags/Windows/"/>
-    
       <category term="MongoDB" scheme="http://light-white.me/tags/MongoDB/"/>
+    
+      <category term="Windows" scheme="http://light-white.me/tags/Windows/"/>
     
   </entry>
   
@@ -277,7 +330,7 @@ __double underscores__
 </code></pre><h1 id="4-其它"><a href="#4-其它" class="headerlink" title="4. 其它"></a>4. 其它</h1><h2 id="4-1-自动链接"><a href="#4-1-自动链接" class="headerlink" title="4.1 自动链接"></a>4.1 自动链接</h2><p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：<br><a href="http://light-white.club/" target="_blank" rel="external">http://light-white.club/</a></p>
 <pre><code>&lt;http://light-white.club/&gt;
 </code></pre><p>邮址的自动链接也很类似</p>
-<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#x77;&#104;&#x69;&#116;&#x65;&#x40;&#x6f;&#x75;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;">&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#x77;&#104;&#x69;&#116;&#x65;&#x40;&#x6f;&#x75;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;</a>
+<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#108;&#105;&#103;&#104;&#x74;&#45;&#119;&#x68;&#x69;&#x74;&#x65;&#64;&#111;&#117;&#x74;&#x6c;&#111;&#x6f;&#107;&#46;&#99;&#x6f;&#x6d;">&#108;&#105;&#103;&#104;&#x74;&#45;&#119;&#x68;&#x69;&#x74;&#x65;&#64;&#111;&#117;&#x74;&#x6c;&#111;&#x6f;&#107;&#46;&#99;&#x6f;&#x6d;</a>
 
 <pre><code>&lt;light-white@outlook.com&gt;
 </code></pre><h2 id="4-2-反斜杠"><a href="#4-2-反斜杠" class="headerlink" title="4.2 反斜杠"></a>4.2 反斜杠</h2><p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>

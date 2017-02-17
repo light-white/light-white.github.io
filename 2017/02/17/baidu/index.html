@@ -4,14 +4,32 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: Markdown | Light-white&#39;s blog</title>
+  <title>百度Ueditor图片管理无法显示 | Light-white&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Light-white's blog">
-<meta property="og:url" content="http://light-white.me/tags/Markdown/index.html">
+  <meta name="description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
+第一时间想到修改config.json中的文件访问路径
+/* 列出指定目录下的图片 */
+&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
+&amp;quot;imageMana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度Ueditor图片管理无法显示">
+<meta property="og:url" content="http://light-white.me/2017/02/17/baidu/index.html">
 <meta property="og:site_name" content="Light-white's blog">
+<meta property="og:description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
+第一时间想到修改config.json中的文件访问路径
+/* 列出指定目录下的图片 */
+&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
+&amp;quot;imageMana">
+<meta property="og:image" content="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png">
+<meta property="og:updated_time" content="2017-02-17T07:28:05.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Light-white's blog">
+<meta name="twitter:title" content="百度Ueditor图片管理无法显示">
+<meta name="twitter:description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
+第一时间想到修改config.json中的文件访问路径
+/* 列出指定目录下的图片 */
+&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
+&amp;quot;imageMana">
+<meta name="twitter:image" content="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png">
   
     <link rel="alternative" href="/atom.xml" title="Light-white&#39;s blog" type="application/atom+xml">
   
@@ -137,54 +155,112 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-baidu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/23/Markdown语法简介/" class="archive-article-date">
-  	<time datetime="2016-09-23T07:51:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/23/Markdown语法简介/">Markdown语法简介</a>
+    <h1 class="article-title" itemprop="name">
+      百度Ueditor图片管理无法显示
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到<br><img src="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png" alt=""><br>打开控制台发现获取的是本地绝对路径</p>
+<p>第一时间想到修改<code>config.json</code>中的文件访问路径</p>
+<pre><code>/* 列出指定目录下的图片 */
+&quot;imageManagerActionName&quot;: &quot;listimage&quot;, /* 执行图片管理的action名称 */
+&quot;imageManagerListPath&quot;: &quot;/ueditor/jsp/upload/image/&quot;, /* 指定要列出图片的目录 */
+&quot;imageManagerListSize&quot;: 20, /* 每次列出文件数量 */
+&quot;imageManagerUrlPrefix&quot;: &quot;http://localhost:8080/Meet/&quot;, /* 图片访问路径前缀 */
+&quot;imageManagerInsertAlign&quot;: &quot;none&quot;, /* 插入的图片浮动方式 */
+&quot;imageManagerAllowFiles&quot;: [&quot;.png&quot;, &quot;.jpg&quot;, &quot;.jpeg&quot;, &quot;.gif&quot;, &quot;.bmp&quot;], /* 列出的文件类型 */
+</code></pre><p>将UrlPrefix修改为当前项目域名<br>然后发现还有问题  这时候绝对路径跟在域名后面了<br>配置文件<code>ueditor.config.js</code>中说<code>controller.jsp</code>是服务器统一请求接口路径<br>我们修改一下他试试<br>修改后代码如下  </p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    import=&quot;com.baidu.ueditor.ActionEnter&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ page trimDirectiveWhitespaces=&quot;true&quot; %&gt;
+&lt;%
+
+    request.setCharacterEncoding( &quot;utf-8&quot; );
+    response.setHeader(&quot;Content-Type&quot; , &quot;text/html&quot;);
+    String rootPath = application.getRealPath( &quot;/&quot; );
+    String action = request.getParameter(&quot;action&quot;);  
+    String result = new ActionEnter( request, rootPath ).exec();  
+    if( action!=null &amp;&amp;   
+       (action.equals(&quot;listfile&quot;) || action.equals(&quot;listimage&quot;) ) ){  
+        rootPath = rootPath.replace(&quot;\\&quot;, &quot;/&quot;);  
+        result = result.replaceAll(rootPath, &quot;/&quot;);  
+    }  
+    out.write( result );
+%&gt;
+</code></pre><p>这时就能看到上传到服务器上的图片与文件了</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/02/17/baidu/" class="archive-article-date">
+  	<time datetime="2017-02-17T07:03:48.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-02-17</time>
+</a>
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsp/">jsp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ueditor/">ueditor</a></li></ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/06/Windows下Python爬虫框架Scrapy安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Windows下Python爬虫框架Scrapy安装</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
 
 
       </div>
@@ -207,9 +283,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/"
