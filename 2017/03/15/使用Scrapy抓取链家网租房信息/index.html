@@ -1,0 +1,743 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MongoDB,Python,Scrapy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Light-white's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. Scrapy介绍Scrapy，Python开发的一个快速,高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据。Scrapy吸引人的地方在于它是一个框架，任何人都可以根据需求方便的修改。Scratch，是抓取的意思，这个Python的爬虫框架叫Scrapy，大概也是这个意思吧，就叫它：小刮刮吧。Scrapy的官方网站：https://scrapy.org/关于Scr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Scrapy抓取链家网租房信息">
+<meta property="og:url" content="http://light-white.me/2017/03/15/使用Scrapy抓取链家网租房信息/index.html">
+<meta property="og:site_name" content="Light-white's blog">
+<meta property="og:description" content="1. Scrapy介绍Scrapy，Python开发的一个快速,高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据。Scrapy吸引人的地方在于它是一个框架，任何人都可以根据需求方便的修改。Scratch，是抓取的意思，这个Python的爬虫框架叫Scrapy，大概也是这个意思吧，就叫它：小刮刮吧。Scrapy的官方网站：https://scrapy.org/关于Scr">
+<meta property="og:updated_time" content="2017-03-15T06:47:41.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Scrapy抓取链家网租房信息">
+<meta name="twitter:description" content="1. Scrapy介绍Scrapy，Python开发的一个快速,高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据。Scrapy吸引人的地方在于它是一个框架，任何人都可以根据需求方便的修改。Scratch，是抓取的意思，这个Python的爬虫框架叫Scrapy，大概也是这个意思吧，就叫它：小刮刮吧。Scrapy的官方网站：https://scrapy.org/关于Scr">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://light-white.me/2017/03/15/使用Scrapy抓取链家网租房信息/"/>
+
+
+
+
+
+  <title> 使用Scrapy抓取链家网租房信息 | Light-white's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Light-white's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/03/15/使用Scrapy抓取链家网租房信息/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="light-white">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Light-white's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Light-white's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Scrapy抓取链家网租房信息
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T13:54:13+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Scrapy介绍"><a href="#1-Scrapy介绍" class="headerlink" title="1. Scrapy介绍"></a>1. Scrapy介绍</h1><p>Scrapy，Python开发的一个快速,高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据。<br>Scrapy吸引人的地方在于它是一个框架，任何人都可以根据需求方便的修改。<br>Scratch，是抓取的意思，这个Python的爬虫框架叫Scrapy，大概也是这个意思吧，就叫它：小刮刮吧。<br>Scrapy的官方网站：<a href="https://scrapy.org/" target="_blank" rel="external">https://scrapy.org/</a><br>关于Scrapy的安装可以看我之前的博客 <a href="http://light-white.me/2017/02/06/Windows%E4%B8%8BPython%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E5%AE%89%E8%A3%85/">Windows下Python爬虫框架Scrapy安装</a>  </p>
+<h1 id="2-创建爬虫项目"><a href="#2-创建爬虫项目" class="headerlink" title="2. 创建爬虫项目"></a>2. 创建爬虫项目</h1><p>在控制台执行<br><code>scrapy startproject myspider</code><br>目录结构如下:  </p>
+<pre><code>└─myspider
+    │  scrapy.cfg
+    └─myspider
+        │  items.py
+        │  middlewares.py
+        │  pipelines.py
+        │  settings.py
+        │  __init__.py
+        ├─spiders
+        │  │  __init__.py
+        │  └─__pycache__
+        └─__pycache__
+</code></pre><h1 id="3-编写爬虫"><a href="#3-编写爬虫" class="headerlink" title="3.编写爬虫"></a>3.编写爬虫</h1><p>在spiders目录下 新建<code>lianjia_spiders.py</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">import</span> re</div><div class="line"></div><div class="line"><span class="keyword">from</span> scrapy.selector <span class="keyword">import</span> Selector</div><div class="line"><span class="keyword">from</span> scrapy.http <span class="keyword">import</span> Request</div><div class="line"><span class="keyword">from</span> lianjia.items <span class="keyword">import</span> LianjiaItem</div><div class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule</div><div class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LianjiaSpider</span><span class="params">(CrawlSpider)</span>:</span></div><div class="line">    name = <span class="string">'lianjia'</span></div><div class="line">    allowed_domains = [<span class="string">'lianjia.com'</span>]</div><div class="line">    rules = (</div><div class="line">        Rule(LinkExtractor(allow=(<span class="string">r'^http://bj.lianjia.com/zufang/BJ[0-9]&#123;10&#125;'</span>, )), callback=<span class="string">'parse_item'</span>,follow=<span class="keyword">True</span>),</div><div class="line">        Rule(LinkExtractor(allow=(<span class="string">r'^http://bj.lianjia.com/zufang/[0-9]&#123;12&#125;'</span>, )), callback=<span class="string">'parse_item'</span>,follow=<span class="keyword">True</span>),</div><div class="line">    )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">yield</span> scrapy.Request(<span class="string">'http://bj.lianjia.com/zufang/'</span>)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">101</span>):</div><div class="line">            <span class="keyword">yield</span> scrapy.Request(<span class="string">'http://bj.lianjia.com/zufang/pg%d/'</span>%i)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, response)</span>:</span></div><div class="line">        print(<span class="string">"-----parse_item-----"</span>)</div><div class="line">        selector = Selector(response)</div><div class="line">        item = LianjiaItem()</div><div class="line">        item[<span class="string">'title'</span>] = selector.xpath(<span class="string">'/html/body/div[4]/div[1]/div/div[1]/h1/text()'</span>).extract_first()</div><div class="line">        item[<span class="string">'area'</span>] = selector.xpath(<span class="string">'/html/body/div[4]/div[2]/div[2]/div[2]/p[1]/text()'</span>).extract_first()</div><div class="line">        item[<span class="string">'price'</span>] = selector.xpath(<span class="string">'/html/body/div[4]/div[2]/div[2]/div[1]/span[1]/text()'</span>).extract_first()</div><div class="line">        regex = selector.xpath(<span class="string">'/html/body/script[12]/text()'</span>).extract()</div><div class="line">        position = re.search(<span class="string">'resblockPosition:(.+),'</span>,regex.pop())</div><div class="line">        item[<span class="string">'position'</span>] = position.group()[:<span class="number">-1</span>].split(<span class="string">':'</span>)[<span class="number">1</span>]</div><div class="line">        <span class="keyword">return</span> item</div></pre></td></tr></table></figure></p>
+<p>其中我们要编写一个类继承<code>scrapy.spiders</code>，不过这里我使用的<code>CrawlSpider</code>来做全站爬取<br>其中<code>name</code>是用来标识一个爬虫，名字唯一<br><code>allowed_domains</code>是允许爬虫爬取的域<br>其中还应该包含一个<code>start_urls</code>作为爬虫爬取的初始页面<br>不过这里我使用<code>start_requests</code>来生成爬取列表了<br><code>rules</code>是<code>CrawlSpider</code>中的属性，用来匹配当前页面中的链接  </p>
+<h2 id="4-items"><a href="#4-items" class="headerlink" title="4.items"></a>4.items</h2><p>items.py中我们编写要抓取的对象信息<br>每次爬取页面都会返回一个item<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LianjiaItem</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    <span class="comment"># define the fields for your item here like:</span></div><div class="line">    id = scrapy.Field()        <span class="comment">#存入数据库的id</span></div><div class="line">    title = scrapy.Field()     <span class="comment">#房屋页面的标题</span></div><div class="line">    area = scrapy.Field()      <span class="comment">#房屋的面积</span></div><div class="line">    price = scrapy.Field()     <span class="comment">#每月房租</span></div><div class="line">    position = scrapy.Field()  <span class="comment">#房屋的经纬度信息</span></div></pre></td></tr></table></figure></p>
+<h2 id="5-Selector选择器"><a href="#5-Selector选择器" class="headerlink" title="5.Selector选择器"></a>5.Selector选择器</h2><p>我们要从页面中抓取数据，需要解析当前HTML页面<br>Scrapy中自带了选择器，可以选择由XPath或CSS表达式指定的部分<br>在这里我使用XPath进行界面的解析，在爬虫中可以看到<br><code>selector.xpath(&#39;/html/body/div[4]/div[2]/div[2]/div[2]/p[1]/text()&#39;).extract().pop()</code><br><code>.extract_first()</code>是返回内容List中的第一个<br>在爬虫中每次都会创建一个item将抓取到的数据存入item 最后函数会返回一个item</p>
+<h2 id="6-Item-pipelines"><a href="#6-Item-pipelines" class="headerlink" title="6.Item pipelines"></a>6.Item pipelines</h2><p>爬虫中返回的Item，都进入到pipelines进行处理<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> codecs</div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LianjiaPipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    collection_name = <span class="string">'lianjia_items'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, mongo_uri, mongo_db)</span>:</span></div><div class="line">        self.mongo_uri = mongo_uri</div><div class="line">        self.mongo_db = mongo_db</div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_crawler</span><span class="params">(cls, crawler)</span>:</span></div><div class="line">        <span class="keyword">return</span> cls(</div><div class="line">            mongo_uri=crawler.settings.get(<span class="string">'MONGO_URI'</span>),</div><div class="line">            mongo_db=crawler.settings.get(<span class="string">'MONGO_DATABASE'</span>)</div><div class="line">        )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.client = pymongo.MongoClient(self.mongo_uri)</div><div class="line">        self.db = self.client[self.mongo_db]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.client.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        self.db[self.collection_name].insert(dict(item))</div><div class="line">        <span class="keyword">return</span> item</div></pre></td></tr></table></figure></p>
+<p>其中必须有<code>process_item</code>来处理爬虫返回的item<br><code>__init__</code>初始化方法<br><code>from_crawler</code>用来读取当前爬虫配置<br><code>open_spider</code>爬虫打开时调用，在此进行数据库链接<br><code>close_spider</code>爬虫关闭时调用，在此关闭数据库链接  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单的进行了试验，要关闭Scrapy的<code>ROBOTSTXT_OBEY = False</code>,并且链家在异常访问时会有验证码<br>早上爬取了600多条后就一直302，还算勉强可以用，有兴趣的朋友可以试着加上ip代理<br>github:<a href="https://github.com/light-white/lianjia_scrapy" target="_blank" rel="external">lianjia_scrapy</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Scrapy/" rel="tag"># Scrapy</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/17/baidu/" rel="next" title="百度Ueditor图片管理无法显示">
+                <i class="fa fa-chevron-left"></i> 百度Ueditor图片管理无法显示
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="light-white" />
+          <p class="site-author-name" itemprop="name">light-white</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/light-white" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/light_whited" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5020561041" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-tao-22-14" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://xiaoyusilen.com/" title="xiaoyusilen" target="_blank">xiaoyusilen</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Scrapy介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Scrapy介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-创建爬虫项目"><span class="nav-number">2.</span> <span class="nav-text">2. 创建爬虫项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-编写爬虫"><span class="nav-number">3.</span> <span class="nav-text">3.编写爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-items"><span class="nav-number">3.1.</span> <span class="nav-text">4.items</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Selector选择器"><span class="nav-number">3.2.</span> <span class="nav-text">5.Selector选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Item-pipelines"><span class="nav-number">3.3.</span> <span class="nav-text">6.Item pipelines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Light-white</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
