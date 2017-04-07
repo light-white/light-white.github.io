@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://light-white.me/2017/04/07/Django+uWSGI+nginx/</loc>
+    
+    <lastmod>2017-04-07T08:56:34.545Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://light-white.me/2017/04/07/Django1.10%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/</loc>
     
     <lastmod>2017-04-07T05:41:16.726Z</lastmod>
