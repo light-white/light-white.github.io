@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ueditor,html,jsp," />
+  <meta name="keywords" content="Python,Django," />
 
 
 
@@ -89,30 +89,55 @@
 
 
 
-<meta name="description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
-第一时间想到修改config.json中的文件访问路径
-/* 列出指定目录下的图片 */
-&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
-&amp;quot;imageMana">
+<meta name="description" content="1. Django项目结构Project/
+│  db.sqlite3
+│  happy_uwsgi.ini
+│  manage.py
+├─Project
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+├─index
+│  │  admin.py
+│  │  apps.py
+│  │  models.py
+│  │">
 <meta property="og:type" content="article">
-<meta property="og:title" content="百度Ueditor图片管理无法显示">
-<meta property="og:url" content="http://light-white.me/2017/02/17/baidu/index.html">
+<meta property="og:title" content="Django 1.10 静态资源配置">
+<meta property="og:url" content="http://light-white.me/2017/04/07/Django1.10静态文件/index.html">
 <meta property="og:site_name" content="Light-white's blog">
-<meta property="og:description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
-第一时间想到修改config.json中的文件访问路径
-/* 列出指定目录下的图片 */
-&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
-&amp;quot;imageMana">
-<meta property="og:image" content="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png">
-<meta property="og:updated_time" content="2017-02-17T07:28:05.518Z">
+<meta property="og:description" content="1. Django项目结构Project/
+│  db.sqlite3
+│  happy_uwsgi.ini
+│  manage.py
+├─Project
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+├─index
+│  │  admin.py
+│  │  apps.py
+│  │  models.py
+│  │">
+<meta property="og:updated_time" content="2017-04-07T05:41:16.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="百度Ueditor图片管理无法显示">
-<meta name="twitter:description" content="今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到打开控制台发现获取的是本地绝对路径
-第一时间想到修改config.json中的文件访问路径
-/* 列出指定目录下的图片 */
-&amp;quot;imageManagerActionName&amp;quot;: &amp;quot;listimage&amp;quot;, /* 执行图片管理的action名称 */
-&amp;quot;imageMana">
-<meta name="twitter:image" content="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png">
+<meta name="twitter:title" content="Django 1.10 静态资源配置">
+<meta name="twitter:description" content="1. Django项目结构Project/
+│  db.sqlite3
+│  happy_uwsgi.ini
+│  manage.py
+├─Project
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+├─index
+│  │  admin.py
+│  │  apps.py
+│  │  models.py
+│  │">
 
 
 
@@ -140,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://light-white.me/2017/02/17/baidu/"/>
+  <link rel="canonical" href="http://light-white.me/2017/04/07/Django1.10静态文件/"/>
 
 
 
 
 
-  <title> 百度Ueditor图片管理无法显示 | Light-white's blog </title>
+  <title> Django 1.10 静态资源配置 | Light-white's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/02/17/baidu/">
+    <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/04/07/Django1.10静态文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="light-white">
@@ -286,7 +311,7 @@
             
             
               
-                百度Ueditor图片管理无法显示
+                Django 1.10 静态资源配置
               
             
           </h1>
@@ -301,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-17T15:03:48+08:00">
-                2017-02-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T13:19:59+08:00">
+                2017-04-07
               </time>
             
 
@@ -320,9 +345,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/17/baidu/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/07/Django1.10静态文件/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/02/17/baidu/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/07/Django1.10静态文件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -348,35 +373,36 @@
       
 
       
-        <p>今天在使用ueditor做新闻编辑时出现一点问题，图片上传之后后台管理界面获取不到<br><img src="http://7xtgk5.com1.z0.glb.clouddn.com/ueditor_imagemanage.png" alt=""><br>打开控制台发现获取的是本地绝对路径</p>
-<p>第一时间想到修改<code>config.json</code>中的文件访问路径</p>
-<pre><code>/* 列出指定目录下的图片 */
-&quot;imageManagerActionName&quot;: &quot;listimage&quot;, /* 执行图片管理的action名称 */
-&quot;imageManagerListPath&quot;: &quot;/ueditor/jsp/upload/image/&quot;, /* 指定要列出图片的目录 */
-&quot;imageManagerListSize&quot;: 20, /* 每次列出文件数量 */
-&quot;imageManagerUrlPrefix&quot;: &quot;http://localhost:8080/Meet/&quot;, /* 图片访问路径前缀 */
-&quot;imageManagerInsertAlign&quot;: &quot;none&quot;, /* 插入的图片浮动方式 */
-&quot;imageManagerAllowFiles&quot;: [&quot;.png&quot;, &quot;.jpg&quot;, &quot;.jpeg&quot;, &quot;.gif&quot;, &quot;.bmp&quot;], /* 列出的文件类型 */
-</code></pre><p>将UrlPrefix修改为当前项目域名<br>然后发现还有问题  这时候绝对路径跟在域名后面了<br>配置文件<code>ueditor.config.js</code>中说<code>controller.jsp</code>是服务器统一请求接口路径<br>我们修改一下他试试<br>修改后代码如下  </p>
-<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
-    import=&quot;com.baidu.ueditor.ActionEnter&quot;
-    pageEncoding=&quot;UTF-8&quot;%&gt;
-&lt;%@ page trimDirectiveWhitespaces=&quot;true&quot; %&gt;
-&lt;%
-
-    request.setCharacterEncoding( &quot;utf-8&quot; );
-    response.setHeader(&quot;Content-Type&quot; , &quot;text/html&quot;);
-    String rootPath = application.getRealPath( &quot;/&quot; );
-    String action = request.getParameter(&quot;action&quot;);  
-    String result = new ActionEnter( request, rootPath ).exec();  
-    if( action!=null &amp;&amp;   
-       (action.equals(&quot;listfile&quot;) || action.equals(&quot;listimage&quot;) ) ){  
-        rootPath = rootPath.replace(&quot;\\&quot;, &quot;/&quot;);  
-        result = result.replaceAll(rootPath, &quot;/&quot;);  
-    }  
-    out.write( result );
-%&gt;
-</code></pre><p>这时就能看到上传到服务器上的图片与文件了</p>
+        <h1 id="1-Django项目结构"><a href="#1-Django项目结构" class="headerlink" title="1. Django项目结构"></a>1. Django项目结构</h1><pre><code>Project/
+│  db.sqlite3
+│  happy_uwsgi.ini
+│  manage.py
+├─Project
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+├─index
+│  │  admin.py
+│  │  apps.py
+│  │  models.py
+│  │  tests.py
+│  │  urls.py
+│  │  views.py
+│  │  __init__.py
+│  ├─migrations
+│  ├─static
+│  │  ├─css
+│  │  ├─js
+│  ├─templates
+│  │      index.html
+└─templates
+</code></pre><p>Project是我的项目名，index是我的一个app名<br>首先，要在我们的app目录下创建两个文件夹<code>templates</code>和<code>static</code><br><code>templates</code>用来存放我们的模板html，<code>static</code>用来存放我们的静态资源</p>
+<h1 id="2-修改settings-py"><a href="#2-修改settings-py" class="headerlink" title="2. 修改settings.py"></a>2. 修改settings.py</h1><p>在配置文件的最后，我们会找到<code>STATIC_URL = &#39;/static/&#39;</code><br>在它的下一行我们添加一行<code>STATIC_ROOT = os.path.join(BASE_DIR, &#39;static&#39;)</code>,然后保存</p>
+<h1 id="3-修改urls-py"><a href="#3-修改urls-py" class="headerlink" title="3. 修改urls.py"></a>3. 修改urls.py</h1><p>在项目名<code>Project</code>下的urls.py中导入两个库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</div><div class="line"><span class="keyword">from</span> django.conf.urls.static <span class="keyword">import</span> static</div></pre></td></tr></table></figure></p>
+<p>在末尾追加<code>+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)</code></p>
+<p>完整的urls.py如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url,include</div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</div><div class="line"><span class="keyword">from</span> django.conf.urls.static <span class="keyword">import</span> static</div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^$'</span>, include(<span class="string">'index.urls'</span>)),</div><div class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</div><div class="line">] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)</div></pre></td></tr></table></figure></p>
+<h1 id="4-修改静态引用"><a href="#4-修改静态引用" class="headerlink" title="4. 修改静态引用"></a>4. 修改静态引用</h1><p>在网页中所有的静态文件引用前要加上<code>/static/</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/static/css/style.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/static/js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -406,11 +432,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ueditor/" rel="tag"># ueditor</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/html/" rel="tag"># html</a>
-          
-            <a href="/tags/jsp/" rel="tag"># jsp</a>
+            <a href="/tags/Django/" rel="tag"># Django</a>
           
         </div>
       
@@ -423,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/06/Windows下Python爬虫框架Scrapy安装/" rel="next" title="Windows下Python爬虫框架Scrapy安装">
-                <i class="fa fa-chevron-left"></i> Windows下Python爬虫框架Scrapy安装
+              <a href="/2017/03/15/使用Scrapy抓取链家网租房信息/" rel="next" title="使用Scrapy抓取链家网租房信息">
+                <i class="fa fa-chevron-left"></i> 使用Scrapy抓取链家网租房信息
               </a>
             
           </div>
@@ -432,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/15/使用Scrapy抓取链家网租房信息/" rel="prev" title="使用Scrapy抓取链家网租房信息">
-                使用Scrapy抓取链家网租房信息 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -489,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -593,6 +622,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Django项目结构"><span class="nav-number">1.</span> <span class="nav-text">1. Django项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-修改settings-py"><span class="nav-number">2.</span> <span class="nav-text">2. 修改settings.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改urls-py"><span class="nav-number">3.</span> <span class="nav-text">3. 修改urls.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-修改静态引用"><span class="nav-number">4.</span> <span class="nav-text">4. 修改静态引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -724,9 +769,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://light-white.me/2017/02/17/baidu/';
-          this.page.identifier = '2017/02/17/baidu/';
-          this.page.title = '百度Ueditor图片管理无法显示';
+          this.page.url = 'http://light-white.me/2017/04/07/Django1.10静态文件/';
+          this.page.identifier = '2017/04/07/Django1.10静态文件/';
+          this.page.title = 'Django 1.10 静态资源配置';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://light-white.disqus.com/embed.js';

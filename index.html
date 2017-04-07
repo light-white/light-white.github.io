@@ -249,6 +249,167 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/04/07/Django1.10静态文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="light-white">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Light-white's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/07/Django1.10静态文件/" itemprop="url">
+                  Django 1.10 静态资源配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T13:19:59+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/07/Django1.10静态文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/07/Django1.10静态文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-Django项目结构"><a href="#1-Django项目结构" class="headerlink" title="1. Django项目结构"></a>1. Django项目结构</h1><pre><code>Project/
+│  db.sqlite3
+│  happy_uwsgi.ini
+│  manage.py
+├─Project
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+├─index
+│  │  admin.py
+│  │  apps.py
+│  │  models.py
+│  │  tests.py
+│  │  urls.py
+│  │  views.py
+│  │  __init__.py
+│  ├─migrations
+│  ├─static
+│  │  ├─css
+│  │  ├─js
+│  ├─templates
+│  │      index.html
+└─templates
+</code></pre><p>Project是我的项目名，index是我的一个app名<br>首先，要在我们的app目录下创建两个文件夹<code>templates</code>和<code>static</code><br><code>templates</code>用来存放我们的模板html，<code>static</code>用来存放我们的静态资源</p>
+<h1 id="2-修改settings-py"><a href="#2-修改settings-py" class="headerlink" title="2. 修改settings.py"></a>2. 修改settings.py</h1><p>在配置文件的最后，我们会找到<code>STATIC_URL = &#39;/static/&#39;</code><br>在它的下一行我们添加一行<code>STATIC_ROOT = os.path.join(BASE_DIR, &#39;static&#39;)</code>,然后保存</p>
+<h1 id="3-修改urls-py"><a href="#3-修改urls-py" class="headerlink" title="3. 修改urls.py"></a>3. 修改urls.py</h1><p>在项目名<code>Project</code>下的urls.py中导入两个库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</div><div class="line"><span class="keyword">from</span> django.conf.urls.static <span class="keyword">import</span> static</div></pre></td></tr></table></figure></p>
+<p>在末尾追加<code>+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)</code></p>
+<p>完整的urls.py如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url,include</div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</div><div class="line"><span class="keyword">from</span> django.conf.urls.static <span class="keyword">import</span> static</div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^$'</span>, include(<span class="string">'index.urls'</span>)),</div><div class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</div><div class="line">] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)</div></pre></td></tr></table></figure></p>
+<h1 id="4-修改静态引用"><a href="#4-修改静态引用" class="headerlink" title="4. 修改静态引用"></a>4. 修改静态引用</h1><p>在网页中所有的静态文件引用前要加上<code>/static/</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/static/css/style.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/static/js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/03/15/使用Scrapy抓取链家网租房信息/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1120,7 +1281,7 @@ __double underscores__
 </code></pre><h1 id="4-其它"><a href="#4-其它" class="headerlink" title="4. 其它"></a>4. 其它</h1><h2 id="4-1-自动链接"><a href="#4-1-自动链接" class="headerlink" title="4.1 自动链接"></a>4.1 自动链接</h2><p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：<br><a href="http://light-white.club/" target="_blank" rel="external">http://light-white.club/</a></p>
 <pre><code>&lt;http://light-white.club/&gt;
 </code></pre><p>邮址的自动链接也很类似</p>
-<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#119;&#104;&#x69;&#x74;&#x65;&#x40;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#105;&#103;&#104;&#x74;&#x2d;&#119;&#104;&#x69;&#x74;&#x65;&#x40;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#x6d;</a>
+<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#105;&#x67;&#x68;&#x74;&#45;&#x77;&#104;&#105;&#x74;&#x65;&#x40;&#111;&#117;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#x6f;&#x6d;">&#x6c;&#105;&#x67;&#x68;&#x74;&#45;&#x77;&#104;&#105;&#x74;&#x65;&#x40;&#111;&#117;&#116;&#x6c;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#x6f;&#x6d;</a>
 
 <pre><code>&lt;light-white@outlook.com&gt;
 </code></pre><h2 id="4-2-反斜杠"><a href="#4-2-反斜杠" class="headerlink" title="4.2 反斜杠"></a>4.2 反斜杠</h2><p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
@@ -1387,7 +1548,7 @@ categories:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1400,7 +1561,7 @@ categories:
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
