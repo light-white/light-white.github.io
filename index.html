@@ -249,6 +249,163 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/11/09/Python函数默认参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="light-white">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Light-white's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/09/Python函数默认参数/" itemprop="url">
+                  Python函数默认参数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T10:30:11+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/09/Python函数默认参数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/09/Python函数默认参数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前面试总会被问到这个问题，不过也只知道意思不是很了解内部原理<br>今天来详细的总结一下</p>
+<h1 id="Python变量"><a href="#Python变量" class="headerlink" title="Python变量"></a>Python变量</h1><p>首先还是要理解一下python中变量的概念<br>变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念<br>Python是一种动态语言 变量并没有固定类型<br>Python中万物皆为对象 变量类似于C的指针  储存对象的地址<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>实际是把1所在地址赋给a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; id(1)</div><div class="line">1666408672</div><div class="line">&gt;&gt;&gt; a = 1</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">1666408672</div></pre></td></tr></table></figure></p>
+<p>可以看到 1 和 a 的地址是一样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = <span class="string">"hello"</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; id(&quot;hello&quot;)</div><div class="line">2087305568016</div><div class="line">&gt;&gt;&gt; a = &quot;hello&quot;</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">2087305568016</div></pre></td></tr></table></figure>
+<p>同理，把”hello”赋值给a之后 a 和 “hello” 的地址相同了</p>
+<p>这里有个问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a = 1</div><div class="line">&gt;&gt;&gt; b = a</div><div class="line">&gt;&gt;&gt; a</div><div class="line">1</div><div class="line">&gt;&gt;&gt; b</div><div class="line">1</div><div class="line">&gt;&gt;&gt; a = 2</div><div class="line">&gt;&gt;&gt; a</div><div class="line">2</div><div class="line">&gt;&gt;&gt; b</div><div class="line">1</div></pre></td></tr></table></figure></p>
+<p>为什么 b 还是1呢  因为b = a是把 a 的值赋给 b 也就是把1赋给b<br>a = 2把 a 指向2的地址  b 的还是指向1的地址<br>执行的过程中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; id(1)</div><div class="line">1666408672</div><div class="line">&gt;&gt;&gt; a = 1</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">1666408672</div><div class="line">&gt;&gt;&gt; b = a</div><div class="line">&gt;&gt;&gt; id(b)</div><div class="line">1666408672</div><div class="line">&gt;&gt;&gt; a = 2</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">1666408704</div><div class="line">&gt;&gt;&gt; b</div><div class="line">1</div><div class="line">&gt;&gt;&gt; id(b)</div><div class="line">1666408672</div></pre></td></tr></table></figure></p>
+<h1 id="Python可变对象和不可变对象"><a href="#Python可变对象和不可变对象" class="headerlink" title="Python可变对象和不可变对象"></a>Python可变对象和不可变对象</h1><p>可变对象就是指创建之后可以进行改变的<br>指的是变量对应内存的值可以被改变<br>不可变对象是不能改变的<br>变量对应内存的值不会被改变<br>我们来看个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a = a +&quot;1&quot;</div><div class="line">&gt;&gt;&gt; id (a)</div><div class="line">2087305572680</div><div class="line">&gt;&gt;&gt; id(&quot;hello&quot;)</div><div class="line">2087305568016</div></pre></td></tr></table></figure></p>
+<p>还是刚才的 a 里面存的是”hello”,我想在后面加上一个”1”<br>a的地址发生了改变,”hello”的地址没有变化<br>实际上是开了一片新的地址 储存了”hello”+”1”的结果<br>然后让a指向这个地址</p>
+<p>可变对象比如list<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; l = []</div><div class="line">&gt;&gt;&gt; id(l)</div><div class="line">2400009794120</div><div class="line">&gt;&gt;&gt; l.append(1)</div><div class="line">&gt;&gt;&gt; l</div><div class="line">[1]</div><div class="line">&gt;&gt;&gt; id(l)</div><div class="line">2400009794120</div></pre></td></tr></table></figure></p>
+<p>我们创建了一个list l ,向l中添加了一个元素1<br>l发生了改变  但是他的地址没有变化</p>
+<p>Python中可变对象有list dirt<br>Python中不可变对象有int float bool str tuple</p>
+<h1 id="Python函数默认参数"><a href="#Python函数默认参数" class="headerlink" title="Python函数默认参数"></a>Python函数默认参数</h1><p>简单介绍下Python的函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">  <span class="keyword">return</span> n * n</div></pre></td></tr></table></figure></p>
+<p>一个简单的返回一个数的平方<br>在python中函数也是一个对象  可以复制给变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; f = fun</div><div class="line">&gt;&gt;&gt; f(1)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; f(2)</div><div class="line">4</div></pre></td></tr></table></figure></p>
+<p>Python中函数可以设置默认参数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n=<span class="number">2</span>)</span>:</span></div><div class="line">  <span class="keyword">return</span> n*n</div><div class="line"></div><div class="line">fun()      <span class="number">4</span></div><div class="line">fun(<span class="number">1</span>)     <span class="number">1</span></div><div class="line">fun(<span class="number">3</span>)     <span class="number">9</span></div></pre></td></tr></table></figure></p>
+<p>好了  终于到了这里</p>
+<p>这是一个之前面试总遇到的问题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(i,l=[])</span>:</span></div><div class="line">  l.append(i)</div><div class="line">  <span class="keyword">return</span> l</div><div class="line">fun(<span class="number">1</span>)</div><div class="line">fun(<span class="number">4</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">fun(<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>问下面三条函数的执行结果<br>在理论上我们想要的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[1]</div><div class="line">[1,2,3,4]</div><div class="line">[2]</div></pre></td></tr></table></figure></p>
+<p>而实际上我们得到的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[1]</div><div class="line">[1,2,3,4]</div><div class="line">[1,2]</div></pre></td></tr></table></figure></p>
+<p>为什么会这样呢</p>
+<p>python中函数也是对象 每个函数只会初始化一次<br>l在第一次调用的时候在系统中初始化了一个空的list<br>当我们没有传入参数的时候 l 就指向这个空的list<br>第一次调用结束后这个list变为了[1]<br>第二次我们传入了一个list l 就指向了我们传入的list<br>第三次我们没有传入list l 指向一开始传入的list并且这个list第一次已经添加了一个元素1 继续进行添加 结果是[1,2]</p>
+<p>那么怎样避免这种情况呢<br>我们可以把l初始化None<br>把list的初始化放在函数内部<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(i,l=None)</span>:</span></div><div class="line">  <span class="keyword">if</span> l <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">    l = []</div><div class="line">  l.append(i)</div><div class="line">  <span class="keyword">return</span> l</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当我们函数默认参数使用可变参数的时候<br>可变参数会被初始化为一个全局变量  通常我们应当避免这种情况<br>不过有些时候也可以利用这种状况<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(i,cache=&#123;&#125;)</span>:</span></div><div class="line">  <span class="keyword">if</span> i &lt; <span class="number">2</span>:</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span></div><div class="line">  cache[i] = fun(i<span class="number">-1</span>)+fun(i<span class="number">-2</span>)</div><div class="line">  <span class="keyword">return</span> cache[i]</div></pre></td></tr></table></figure></p>
+<p>这样我们就实现了一个简单的带缓存的斐波那契数列</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://light-white.me/2017/04/07/Django+uWSGI+nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1440,7 +1597,7 @@ __double underscores__
 </code></pre><h1 id="4-其它"><a href="#4-其它" class="headerlink" title="4. 其它"></a>4. 其它</h1><h2 id="4-1-自动链接"><a href="#4-1-自动链接" class="headerlink" title="4.1 自动链接"></a>4.1 自动链接</h2><p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：<br><a href="http://light-white.club/" target="_blank" rel="external">http://light-white.club/</a></p>
 <pre><code>&lt;http://light-white.club/&gt;
 </code></pre><p>邮址的自动链接也很类似</p>
-<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#108;&#105;&#103;&#104;&#x74;&#45;&#119;&#104;&#105;&#x74;&#101;&#64;&#x6f;&#117;&#x74;&#108;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#x6d;">&#108;&#105;&#103;&#104;&#x74;&#45;&#119;&#104;&#105;&#x74;&#101;&#64;&#x6f;&#117;&#x74;&#108;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#x6d;</a>
+<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x6c;&#x69;&#103;&#104;&#116;&#x2d;&#119;&#104;&#105;&#x74;&#101;&#x40;&#111;&#117;&#x74;&#108;&#111;&#111;&#107;&#x2e;&#x63;&#x6f;&#109;">&#x6c;&#x69;&#103;&#104;&#116;&#x2d;&#119;&#104;&#105;&#x74;&#101;&#x40;&#111;&#117;&#x74;&#108;&#111;&#111;&#107;&#x2e;&#x63;&#x6f;&#109;</a>
 
 <pre><code>&lt;light-white@outlook.com&gt;
 </code></pre><h2 id="4-2-反斜杠"><a href="#4-2-反斜杠" class="headerlink" title="4.2 反斜杠"></a>4.2 反斜杠</h2><p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
@@ -1707,7 +1864,7 @@ categories:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
